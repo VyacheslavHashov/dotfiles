@@ -1,0 +1,17 @@
+[user]
+	name = VyacheslavHashov
+	email = vyacheslavhashov@gmail.com
+[alias]
+	co = checkout
+    st = status
+[core]
+	editor = /usr/bin/vi
+[push]
+	default = simple
+[credential]
+	helper = cache --timeout=1800
+[pull]
+	rebase = true
+[merge]
+	ff = false
+	log = false
