@@ -178,9 +178,10 @@ map <Leader>te :GhcModTypeClear<CR>
 " ---------------------------------------------------------
 let g:haskell_tabular = 1
 
-vmap a= :Tabularize /=<CR>
-vmap a; :Tabularize /::<CR>
-vmap a- :Tabularize /-><CR>
+vmap a= :Tabularize /^[^=]*\zs=<CR>
+vmap a; :Tabularize /^[^(::)]*\zs::<CR>
+vmap a- :Tabularize /^[^(->)]*\zs-><CR>
+vmap a\ :Tabularize /^[^\|]*\zs\|<CR>
 
 " ---------------------------------------------------------
 " NERD Tree
