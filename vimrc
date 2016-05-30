@@ -25,7 +25,7 @@ Plug 'raichoo/purescript-vim'
 Plug 'Shougo/neocomplete.vim'
 Plug 'godlygeek/tabular'
 
-Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+Plug 'ernstwi/haskell-vim', { 'for': 'haskell' }
 Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
 
