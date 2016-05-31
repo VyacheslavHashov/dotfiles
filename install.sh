@@ -13,3 +13,6 @@ ln -s ${BASEDIR}/bashrc ~/.bashrc
 
 # git
 ln -s ${BASEDIR}/gitconfig ~/.gitconfig
+
+# stylish-haskell
+ln -s ${BASEDIR}/stylish-haskell.yaml ~/.stylish-haskell.yaml
