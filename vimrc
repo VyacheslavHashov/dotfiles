@@ -240,7 +240,15 @@ func! DeleteTrailingWS()
     exe "normal `z"
 endfunc
 
+" Deleting all the empty lines at the end of a file except one
+func! LeaveBlankLine()
+    :silent! %s#\($\n\s*\)\+\%$##
+    noh
+    $put _
+endfunc
+
 augroup whitespace
     autocmd!
     autocmd BufWrite *.hs :call DeleteTrailingWS()
+    autocmd BufWrite *.hs :call LeaveBlankLine()
 augroup END
