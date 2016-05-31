@@ -125,7 +125,7 @@ set hlsearch
 set rnu
 set numberwidth=2 
 set scrolloff=8
-set colorcolumn=80
+set colorcolumn=81
 
 set hidden
 set noshowmode
