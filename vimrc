@@ -191,14 +191,14 @@ let NERDTreeIgnore=['\~$', '__pycache__', '\.pyc$', '\.pyo$', '\.class$', 'pip-l
 " ---------------------------------------------------------
 "  Flake-8
 "  --------------------------------------------------------
-let g:flake8_show_quickfix=0
-let g:flake8_show_in_gutter=1
-autocmd BufWritePost *.py call Flake8()
-highlight link Flake8_Error      ErrorMsg
-highlight link Flake8_Warning    WarningMsg
-highlight link Flake8_Complexity WarningMsg
-highlight link Flake8_Naming     WarningMsg
-highlight link Flake8_PyFlake    WarningMsg
+" let g:flake8_show_quickfix=0
+" let g:flake8_show_in_gutter=1
+" autocmd BufWritePost *.py call Flake8()
+" highlight link Flake8_Error      ErrorMsg
+" highlight link Flake8_Warning    WarningMsg
+" highlight link Flake8_Complexity WarningMsg
+" highlight link Flake8_Naming     WarningMsg
+" highlight link Flake8_PyFlake    WarningMsg
 " ---------------------------------------------------------- 
 " Airline 
 " ---------------------------------------------------------- 
@@ -242,9 +242,11 @@ endfunc
 
 " Deleting all the empty lines at the end of a file except one
 func! LeaveBlankLine()
+    let cursor = getpos(".")
     :silent! %s#\($\n\s*\)\+\%$##
     noh
     $put _
+    call setpos('.', cursor)
 endfunc
 
 augroup whitespace
