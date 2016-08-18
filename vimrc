@@ -24,6 +24,9 @@ Plug 'shougo/vimproc.vim', { 'do': 'make' }
 Plug 'raichoo/purescript-vim'
 Plug 'Shougo/neocomplete.vim'
 Plug 'godlygeek/tabular'
+Plug 'lambdatoast/elm.vim'
+Plug 'lifepillar/pgsql.vim'
+Plug 'pbrisbin/vim-syntax-shakespeare'
 
 Plug 'ernstwi/haskell-vim', { 'for': 'haskell' }
 Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
