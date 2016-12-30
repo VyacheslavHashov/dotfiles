@@ -16,3 +16,6 @@ ln -s ${BASEDIR}/gitconfig ~/.gitconfig
 
 # stylish-haskell
 ln -s ${BASEDIR}/stylish-haskell.yaml ~/.stylish-haskell.yaml
+
+# tmux
+ln -s ${BASEDIR}/tmux.conf ~/.tmux.conf

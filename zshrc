@@ -82,6 +82,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+export TERM=xterm-256color
+
 # Sets display brightness
 function lowbr {
     echo 1500 | sudo tee /sys/class/backlight/intel_backlight/brightness
