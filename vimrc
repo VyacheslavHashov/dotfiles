@@ -27,6 +27,7 @@ Plug 'godlygeek/tabular'
 Plug 'lambdatoast/elm.vim'
 Plug 'lifepillar/pgsql.vim'
 Plug 'pbrisbin/vim-syntax-shakespeare'
+Plug 'evanmiller/nginx-vim-syntax'
 
 Plug 'ernstwi/haskell-vim', { 'for': 'haskell' }
 Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
@@ -234,26 +235,35 @@ imap <F10> <esc>:BD<cr>
 map <F9> :q<cr>
 imap <F9> <esc>:q<cr>
 
+" inserts a blank line in normal mode
+nnoremap <leader>o o<Esc>k
+
+" editing inner arguments
+au FileType haskell onoremap <silent> ia :<c-u>silent execute "normal! ?->\r:nohlsearch\rwvf-ge"<CR>
+au FileType haskell onoremap <silent> aa :<c-u>silent execute "normal! ?->\r:nohlsearch\rhvEf-ge"<CR>
+
+function! JumpHaskellFunction(reverse)
+    call search('\C[[:alnum:]]*\s*::', a:reverse ? 'bW' : 'W')
+endfunction
+
+" jumping between functions
+au FileType haskell nnoremap <buffer><silent> [ :call JumpHaskellFunction(0)<CR>
+au FileType haskell nnoremap <buffer><silent> ] :call JumpHaskellFunction(1)<CR>
+
+" jump to the first import line
+au FileType haskell nnoremap <buffer> gi gg /\cimport<CR><ESC>:noh<CR>
 " ---------------------------------------------------------
 
-" Delete trailing white space on save
-func! DeleteTrailingWS()
-    exe "normal mz"
-    %s/\s\+$//ge
-    exe "normal `z"
-endfunc
-
-" Deleting all the empty lines at the end of a file except one
-func! LeaveBlankLine()
+func! TrimWhitespace()
     let cursor = getpos(".")
-    :silent! %s#\($\n\s*\)\+\%$##
-    noh
-    $put _
+    " deletes trailing white space 
+    %s/\s\+$//ge
+    " deletes all the empty lines at the end of a file except one
+    %s/\($\n\s*\)*\%$//e
     call setpos('.', cursor)
 endfunc
 
 augroup whitespace
     autocmd!
-    autocmd BufWrite *.hs :call DeleteTrailingWS()
-    autocmd BufWrite *.hs :call LeaveBlankLine()
+    autocmd BufWrite *.hs :call TrimWhitespace()
 augroup END
