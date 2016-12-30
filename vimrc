@@ -49,19 +49,6 @@ filetype on
 " Set to auto read when a file is changed from the outside
 set autoread
 
-if ! exists("mapleader")
-    let mapleader = ","
-endif
-
-if ! exists("g:mapleader")
-    let g:mapleader = ","
-endif
-
-" Leader key timeout
-set tm=2000
-
-" Allow the normal use of "," by pressing it twice
-noremap ,, ,
 
 " Kill Ex mode
 nnoremap Q <nop>
@@ -139,6 +126,9 @@ set completeopt=menuone,menu,longest
 set wildignore+=*\\tmp\\*,*.swp,*.swo,*.zip,.git,.cabal-sandbox
 set wildmode=longest,list,full
 set wildmenu
+
+" highlight Comment cterm=italic
+
 " ---------------------------------------------------------
 " Syntastic
 " ---------------------------------------------------------
@@ -151,15 +141,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-
-" ---------------------------------------------------------
-"  ghc-mod
-" ---------------------------------------------------------
-
-map <Leader>tw :GhcModTypeInsert<CR>
-map <Leader>ts :GhcModSplitFunCase<CR>
-map <Leader>tq :GhcModType<CR>
-map <Leader>te :GhcModTypeClear<CR>
 
 " ---------------------------------------------------------
 "  Supertab
@@ -192,17 +173,6 @@ vmap a\ :Tabularize /^[^\|]*\zs\|<CR>
 "  --------------------------------------------------------
 let NERDTreeIgnore=['\~$', '__pycache__', '\.pyc$', '\.pyo$', '\.class$', 'pip-log\.txt$', '\.o$']
 
-" ---------------------------------------------------------
-"  Flake-8
-"  --------------------------------------------------------
-" let g:flake8_show_quickfix=0
-" let g:flake8_show_in_gutter=1
-" autocmd BufWritePost *.py call Flake8()
-" highlight link Flake8_Error      ErrorMsg
-" highlight link Flake8_Warning    WarningMsg
-" highlight link Flake8_Complexity WarningMsg
-" highlight link Flake8_Naming     WarningMsg
-" highlight link Flake8_PyFlake    WarningMsg
 " ---------------------------------------------------------- 
 " Airline 
 " ---------------------------------------------------------- 
@@ -216,6 +186,21 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " ---------------------------------------------------------- 
 " Mappings 
 " ---------------------------------------------------------- 
+
+if ! exists("mapleader")
+    let mapleader = ","
+endif
+
+if ! exists("g:mapleader")
+    let g:mapleader = ","
+endif
+
+" Leader key timeout
+set tm=2000
+
+" Allow the normal use of "," by pressing it twice
+noremap ,, ,
+
 " pressing ; will go into command mode
 nnoremap ; :
 map <F2> :NERDTreeToggle<CR>
