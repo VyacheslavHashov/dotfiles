@@ -28,6 +28,7 @@ Plug 'lambdatoast/elm.vim'
 Plug 'lifepillar/pgsql.vim'
 Plug 'pbrisbin/vim-syntax-shakespeare'
 Plug 'evanmiller/nginx-vim-syntax'
+Plug 'MattesGroeger/vim-bookmarks'
 
 Plug 'ernstwi/haskell-vim', { 'for': 'haskell' }
 Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
@@ -114,7 +115,7 @@ set incsearch
 set hlsearch
 " Set relative line numbers
 set rnu
-set numberwidth=2 
+set numberwidth=2
 set scrolloff=8
 set colorcolumn=81
 
@@ -173,9 +174,9 @@ vmap a\ :Tabularize /^[^\|]*\zs\|<CR>
 "  --------------------------------------------------------
 let NERDTreeIgnore=['\~$', '__pycache__', '\.pyc$', '\.pyo$', '\.class$', 'pip-log\.txt$', '\.o$']
 
-" ---------------------------------------------------------- 
-" Airline 
-" ---------------------------------------------------------- 
+" ----------------------------------------------------------
+" Airline
+" ----------------------------------------------------------
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tab_type = 0
@@ -183,9 +184,50 @@ let g:airline_theme='sol_imp'
 
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
-" ---------------------------------------------------------- 
-" Mappings 
-" ---------------------------------------------------------- 
+
+" ----------------------------------------------------------
+" Vim-bookmarks
+" ----------------------------------------------------------
+
+" Disables name clashing with NERDTree bindings
+let g:bookmark_no_default_key_mappings = 1
+function! BookmarkMapKeys()
+    nmap mm :BookmarkToggle<CR>
+    nmap mi :BookmarkAnnotate<CR>
+    nmap mn :BookmarkNext<CR>
+    nmap mp :BookmarkPrev<CR>
+    nmap ma :BookmarkShowAll<CR>
+    nmap mc :BookmarkClear<CR>
+    nmap mx :BookmarkClearAll<CR>
+    nmap mkk :BookmarkMoveUp
+    nmap mjj :BookmarkMoveDown
+endfunction
+
+function! BookmarkUnmapKeys()
+    unmap mm
+    unmap mi
+    unmap mn
+    unmap mp
+    unmap ma
+    unmap mc
+    unmap mx
+    unmap mkk
+    unmap mjj
+endfunction
+
+autocmd BufEnter * :call BookmarkMapKeys()
+autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
+
+let g:bookmark_sign = '# '
+let g:bookmark_annotation_sign = '# '
+let g:bookmark_auto_close = 1
+let g:bookmark_center = 1
+
+highlight BookmarkSign ctermbg=NONE ctermfg=25
+highlight BookmarkAnnotationSign ctermbg=NONE ctermfg=25
+" ----------------------------------------------------------
+" Mappings
+" ----------------------------------------------------------
 
 if ! exists("mapleader")
     let mapleader = ","
@@ -207,7 +249,7 @@ map <F2> :NERDTreeToggle<CR>
 " previous buffer
 map <F4> :bp<cr>
 imap <F4> <esc>:bp<cr>
-  
+
 " next buffer
 map <F5> :bn<cr>
 imap <F5> <esc>:bn<cr>
@@ -241,7 +283,7 @@ au FileType haskell nnoremap <buffer> gi gg /\cimport<CR><ESC>:noh<CR>
 
 func! TrimWhitespace()
     let cursor = getpos(".")
-    " deletes trailing white space 
+    " deletes trailing white space
     %s/\s\+$//ge
     " deletes all the empty lines at the end of a file except one
     %s/\($\n\s*\)*\%$//e
@@ -252,3 +294,4 @@ augroup whitespace
     autocmd!
     autocmd BufWrite *.hs :call TrimWhitespace()
 augroup END
+
