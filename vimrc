@@ -30,7 +30,7 @@ Plug 'pbrisbin/vim-syntax-shakespeare'
 Plug 'evanmiller/nginx-vim-syntax'
 Plug 'MattesGroeger/vim-bookmarks'
 
-Plug 'ernstwi/haskell-vim', { 'for': 'haskell' }
+Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
 Plug 'eagletmt/neco-ghc', { 'for': 'haskell' }
 
@@ -69,6 +69,8 @@ set expandtab
 " Automaticaly indent
 set smartindent
 set autoindent
+" Disable indentation coming form haskell-vim
+let g:haskell_indent_disable = 1
 
 " Make the 'cw' and like commands put a $ at the end instead of just deleting
 " the text and replacing it
